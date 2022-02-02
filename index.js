@@ -13,11 +13,26 @@ mongoose
   .then(x => {
     console.log(`Connected to the database: "${x.connection.name}"`);
     // Before adding any recipes to the database, let's remove all existing ones
-    return Recipe.deleteMany()
+    // return Recipe.deleteMany()
   })
   .then(() => {
     // Run your code here, after you have insured that the connection was made
+    // Recipe.create({
+    //   title: 'Butter Chicken',
+    //   level: 'Easy Peasy',
+    //   ingredients: ['eggs', 'chicken', 'spices', 'coriander', 'onions', 'tomatoes', 'etc'],
+    //   cuisine: 'yes',
+    //   dishType: 'main_course',
+    //   image: 'https://hips.hearstapps.com/hmg-prod/images/delish-191119-butter-chicken-0375-landscape-pf-1574729676.jpg',
+    //   duration: 90,
+    //   creator: 'Mihir',
+    // })
   })
+
   .catch(error => {
     console.error('Error connecting to the database', error);
-  });
+  })
+  .finally(() => {
+    console.log('Connection Closed');
+    mongoose.connection.close();
+  })
